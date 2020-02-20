@@ -17,7 +17,7 @@ function main() {
         <App />
       </BrowserRouter>
     </Provider>,
-    document.querySelector(".app-wrapper")
+    document.querySelector(".app-wrapper") // injects into index.html
   );
 }
 
