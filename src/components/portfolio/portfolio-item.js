@@ -2,7 +2,6 @@ import React from 'react';
 
 
 
-
 export default function PortfolioItem() {
     // use a functional/presentational component just to render data
     return (
