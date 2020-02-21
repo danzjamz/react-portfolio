@@ -11,8 +11,9 @@ export default class PortfolioContainer extends Component {
 
     portfolioItems() {
         const data = ['Fenrir', 'Zuko', 'Paul'];
+
         return data.map(item => {
-            return <PortfolioItem />;
+            return <PortfolioItem title={item} url={'google.com'} />; // passing values into functional component
         });
     }
 
