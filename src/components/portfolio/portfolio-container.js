@@ -6,21 +6,29 @@ export default class PortfolioContainer extends Component {
 
     constructor() {
         super(); // MUST have this
-        console.log('Portfolio container has rendered');
+        
+        this.state = {
+            pageTitle: 'Welcome',
+            data: [
+                {title: 'Fenrir'},
+                {title: 'Zuko'},
+                {title: 'Paul'}
+            ]
+        };
     }
 
     portfolioItems() {
-        const data = ['Fenrir', 'Zuko', 'Paul'];
-
-        return data.map(item => {
-            return <PortfolioItem title={item} url={'google.com'} />; // passing values into functional component
+        return this.state.data.map(item => {
+            return <PortfolioItem title={item.title} url={'google'} />; // passing values into functional component
         });
     }
 
 
     render() {
         return (
+            // uses JSX to simplify rendering of html from react
             <div className='app'>
+                <h2>{this.state.pageTitle}</h2>
                 <h1>Porfolio items go here...</h1>
                 { this.portfolioItems() }
             </div>
