@@ -9,6 +9,7 @@ export default class PortfolioContainer extends Component {
         
         this.state = {
             pageTitle: 'Welcome',
+            isLoading: true,
             data: [
                 {title: 'Fenrir', category: 'dog'},
                 {title: 'Zuko', category: 'dog'},
@@ -34,6 +35,9 @@ export default class PortfolioContainer extends Component {
     }
 
     render() {
+        if (this.state.isLoading) {
+            return <div>Loading</div>
+        }
         return (
             // uses JSX to simplify rendering of html from react
             <div className='app'>
