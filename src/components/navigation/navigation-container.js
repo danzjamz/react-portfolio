@@ -11,11 +11,12 @@ export default class NavigationComponent extends Component {
 
     render() {
         return (
-            <div> exact to='/'
-                <NavLink exact to='/'>Home</NavLink>
+            <div> 
+                {/* navlinks add the active class to the current page link */}
+                <NavLink exact to='/'>Home</NavLink> 
                 <NavLink to='/about'>About</NavLink>
-                <button>Contact</button>
-                <button>Blog</button>
+                <NavLink to='/contact'>Contact</NavLink>
+                <NavLink to='/blog'>Blog</NavLink>
                 { false ? <button>Add Blog</button> : null }
             </div>
         )
