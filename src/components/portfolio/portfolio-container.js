@@ -15,12 +15,20 @@ export default class PortfolioContainer extends Component {
                 {title: 'Paul'}
             ]
         };
+
+        this.handlePageTitle = this.handlePageTitle.bind(this);
     }
 
     portfolioItems() {
         return this.state.data.map(item => {
             return <PortfolioItem title={item.title} url={'google'} />; // passing values into functional component
         });
+    }
+
+    handlePageTitle() {
+        this.setState({
+            pageTitle: 'Something else'
+        })
     }
 
 
@@ -31,6 +39,8 @@ export default class PortfolioContainer extends Component {
                 <h2>{this.state.pageTitle}</h2>
                 <h1>Porfolio items go here...</h1>
                 { this.portfolioItems() }
+
+                <button onClick={this.handlePageTitle}>change title</button>
             </div>
         );
     }
