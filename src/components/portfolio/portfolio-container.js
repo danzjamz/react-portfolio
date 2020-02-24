@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PortfolioItem from './portfolio-item';
 
 export default class PortfolioContainer extends Component {
-    // for State and lifecycle hooks use class compenent
+    // for State and lifecycle hooks use class component
 
     constructor() {
         super(); // MUST have this
