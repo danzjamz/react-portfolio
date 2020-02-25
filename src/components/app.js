@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import axios from 'axios';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import NavigationComponent from './navigation/navigation-container';
@@ -12,26 +11,7 @@ import PortfolioDetail from './portfolio/portfolio-detail';
 import noMatch from './pages/no-match';
 
 export default class App extends Component {
-  constructor() {
-    super();
-
-    this.getPortfolioItems = this.getPortfolioItems.bind(this);
-  }
-  
-  getPortfolioItems() {
-    // Make a request for a user with a given ID
-    axios.get('https://danzjamz.devcamp.space/portfolio/portfolio_items')
-      .then((response) => {
-        // handle success
-        console.log(response);
-      })
-      .catch((error) => {
-        // handle error
-        console.log(error);
-      });
-  }
   render() {
-    this.getPortfolioItems();
     return (
       <div className='app'>
         <Router>
