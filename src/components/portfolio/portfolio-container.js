@@ -11,9 +11,9 @@ export default class PortfolioContainer extends Component {
             pageTitle: 'Welcome',
             isLoading: false,
             data: [
-                {title: 'Fenrir', category: 'dog'},
-                {title: 'Zuko', category: 'dog'},
-                {title: 'Paul', category: 'person'}
+                {title: 'Fenrir', category: 'dog', slug: 'fenrir'},
+                {title: 'Zuko', category: 'dog', slug: 'zuko'},
+                {title: 'Paul', category: 'person', slug: 'paul'}
             ]
         };
 
@@ -30,7 +30,7 @@ export default class PortfolioContainer extends Component {
 
     portfolioItems() {
         return this.state.data.map(item => {
-            return <PortfolioItem title={item.title} url={'google'} />; // passing values into functional component
+            return <PortfolioItem title={item.title} url={'google'} slug={item.slug} />; // passing values into functional component
         });
     }
 

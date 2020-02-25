@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 
 
 export default function PortfolioItem(props) {
@@ -7,7 +7,7 @@ export default function PortfolioItem(props) {
     return (
         <div>
             <h3>{ props.title }</h3> {/* retrieve passed items */}
-            <a href='https://google.com'>{ props.url }</a>
+            <Link to={`/portfolio/${props.slug}`}>Link</Link>
         </div>
     )
 }

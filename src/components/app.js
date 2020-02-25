@@ -8,6 +8,7 @@ import home from './pages/home';
 import about from './pages/about';
 import contact from './pages/contact';
 import blog from './pages/blog';
+import PortfolioDetail from './portfolio/portfolio-detail';
 
 export default class App extends Component {
   render() {
@@ -24,6 +25,7 @@ export default class App extends Component {
               <Route path='/about' activeClassName='nav-link-active' component={about} />
               <Route path='/contact' activeClassName='nav-link-active' component={contact} />
               <Route path='/blog' activeClassName='nav-link-active' component={blog} />
+              <Route path='/portfolio/:slug' activeClassName='nav-link-active' component={PortfolioDetail} />
             </Switch>
           </div>
         </Router>
