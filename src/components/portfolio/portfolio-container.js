@@ -12,15 +12,10 @@ export default class PortfolioContainer extends Component {
         this.state = {
             pageTitle: 'HomePage',
             isLoading: false,
-            data: [
-                {title: 'Fenrir', category: 'dog', slug: 'fenrir'},
-                {title: 'Zuko', category: 'dog', slug: 'zuko'},
-                {title: 'Paul', category: 'person', slug: 'paul'}
-            ]
+            data: [ ]
         };
 
         this.handleFilter = this.handleFilter.bind(this);
-        this.getPortfolioItems = this.getPortfolioItems.bind(this);
     }
 
     handleFilter(filter) {
@@ -37,6 +32,9 @@ export default class PortfolioContainer extends Component {
           .then((response) => {
             // handle success
             console.log(response);
+            this.setState({
+                data: response.data.portfolio_items
+            })
           })
           .catch((error) => {
             // handle error
@@ -46,8 +44,13 @@ export default class PortfolioContainer extends Component {
 
     portfolioItems() {
         return this.state.data.map(item => {
-            return <PortfolioItem title={item.title} url={'google'} slug={item.slug} />; // passing values into functional component
+            console.log('data', item)
+            return <PortfolioItem title={item.name} url={item.url} slug={item.id} />; // passing values into functional component
         });
+    }
+
+    componentDidMount() {
+        this.getPortfolioItems();
     }
 
     render() {
@@ -55,7 +58,6 @@ export default class PortfolioContainer extends Component {
             return <div>Loading</div>
         }
 
-        this.getPortfolioItems()
         return (
             // uses JSX to simplify rendering of html from react
             <div className='app'>
@@ -64,7 +66,7 @@ export default class PortfolioContainer extends Component {
                 <button onClick={() => this.handleFilter('person')}>person</button>
                 <button onClick={() => this.handleFilter('dog')}>dog</button>
 
-                { this.portfolioItems() }
+                <h3>{ this.portfolioItems() }</h3>
 
             </div>
         );
