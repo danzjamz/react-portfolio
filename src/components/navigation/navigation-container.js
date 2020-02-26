@@ -15,16 +15,16 @@ export default class NavigationComponent extends Component {
                 <div className="left-side">
                     {/* navlinks add the active class to the current page link */}
                     <div className="nav-link-wrapper">
-                        <NavLink exact to='/'>Home</NavLink> 
+                        <NavLink exact to='/' activeClassName='nav-link-active'>Home</NavLink> 
                     </div>
                     <div className="nav-link-wrapper">
-                        <NavLink to='/about'>About</NavLink>
+                        <NavLink to='/about' activeClassName='nav-link-active'>About</NavLink>
                     </div>
                     <div className="nav-link-wrapper">
-                        <NavLink to='/contact'>Contact</NavLink>
+                        <NavLink to='/contact' activeClassName='nav-link-active'>Contact</NavLink>
                     </div>
                     <div className="nav-link-wrapper">
-                        <NavLink to='/blog'>Blog</NavLink>
+                        <NavLink to='/blog' activeClassName='nav-link-active'>Blog</NavLink>
                     </div>
                 </div>
 
