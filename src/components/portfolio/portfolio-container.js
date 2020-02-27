@@ -65,17 +65,14 @@ export default class PortfolioContainer extends Component {
 
         return (
             // uses JSX to simplify rendering of html from react
-            <div className='app'>
-                <h2>{this.state.pageTitle}</h2>
-                
-                <button onClick={() => this.handleFilter('person')}>person</button>
-                <button onClick={() => this.handleFilter('dog')}>dog</button>
-
+            
                 <div className="portfolio-items-wrapper">
+                    <button className="btn" onClick={() => this.handleFilter('eCommerce')}>eCommerce</button>
+                    <button className="btn" onClick={() => this.handleFilter('Enterprise')}>Enterprise</button>
+                    <button className="btn" onClick={() => this.handleFilter('Education')}>Education</button>
+
                     { this.portfolioItems() }
                 </div>
-
-            </div>
         );
     }
 }
