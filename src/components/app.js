@@ -8,6 +8,7 @@ import contact from './pages/contact';
 import blog from './pages/blog';
 import PortfolioDetail from './portfolio/portfolio-detail';
 import noMatch from './pages/no-match';
+import Auth from './pages/auth';
 
 export default class App extends Component {
   render() {
@@ -19,6 +20,7 @@ export default class App extends Component {
 
             <Switch>
               <Route exact path='/' component={home} />
+              <Route path='/auth' component={Auth} />
               <Route path='/about' component={about} />
               <Route path='/contact' component={contact} />
               <Route path='/blog' component={blog} />
