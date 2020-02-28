@@ -9,6 +9,7 @@ import blog from './pages/blog';
 import PortfolioDetail from './portfolio/portfolio-detail';
 import noMatch from './pages/no-match';
 import Auth from './pages/auth';
+import axios from 'axios';
 
 export default class App extends Component {
   constructor(props) {
@@ -20,6 +21,8 @@ export default class App extends Component {
 
     this.handleSuccessfulLogin = this.handleSuccessfulLogin.bind(this);
     this.handleUnsuccessfulLogin =  this.handleUnsuccessfulLogin.bind(this);
+    
+    this.checkLoginStatus() 
   }
 
   handleSuccessfulLogin() {
@@ -28,6 +31,28 @@ export default class App extends Component {
 
   handleUnsuccessfulLogin() {
     this.setState({ loggedInStatus: "NOT_LOGGED_IN" })
+  }
+
+  checkLoginStatus() {
+    return axios.get('https://api.devcamp.space/logged_in', { withCredentials: true })
+      .then(response => {
+        const loggedIn = response.data.logged_in;
+        const loggedInStatus = this.state.loggedInStatus;
+
+        if (loggedIn && loggedInStatus === 'LOGGED_IN') {
+          return loggedIn;
+        } else if (loggedIn && loggedInStatus === 'NOT_LOGGED_IN') {
+          this.setState({
+            loggedInStatus: 'LOGGED_IN'
+          });
+        } else if (!loggedIn && loggedInStatus === 'LOGGED_IN') {
+          this.setState({
+            loggedInStatus: 'NOT_LOGGED_IN'
+          });
+        }
+      }).catch(error => {
+        console.log('Error', error);
+      })
   }
   
   render() {
