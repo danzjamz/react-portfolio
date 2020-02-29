@@ -10,6 +10,7 @@ import PortfolioDetail from './portfolio/portfolio-detail';
 import noMatch from './pages/no-match';
 import Auth from './pages/auth';
 import axios from 'axios';
+import PortfolioManager from './portfolio/portfolio-manager';
 
 export default class App extends Component {
   constructor(props) {
@@ -21,6 +22,7 @@ export default class App extends Component {
 
     this.handleSuccessfulLogin = this.handleSuccessfulLogin.bind(this);
     this.handleUnsuccessfulLogin =  this.handleUnsuccessfulLogin.bind(this);
+    this.handleSuccessfulLogout =  this.handleSuccessfulLogout.bind(this);
     
     this.checkLoginStatus() 
   }
@@ -31,6 +33,10 @@ export default class App extends Component {
 
   handleUnsuccessfulLogin() {
     this.setState({ loggedInStatus: "NOT_LOGGED_IN" })
+  }
+
+  handleSuccessfulLogout() {
+    this.setState({ loggedInStatus: 'NOT_LOGGED_IN' })
   }
 
   checkLoginStatus() {
@@ -57,7 +63,7 @@ export default class App extends Component {
 
   authorizePages() {
     return [
-      <Route path='/blog' component={blog} />
+      <Route path ='/portfolio-manager' component={PortfolioManager} />
     ]
   }
   
@@ -66,7 +72,7 @@ export default class App extends Component {
       <div className='container'>
         <Router>
           <div>
-            <NavigationComponent loggedInStatus={ this.state.loggedInStatus } />
+            <NavigationComponent loggedInStatus={ this.state.loggedInStatus } handleSuccessfulLogout={ this.handleSuccessfulLogout } />
 
             <h2>{ this.state.loggedInStatus }</h2>
 
@@ -85,6 +91,7 @@ export default class App extends Component {
 
               <Route path='/about' component={about} />
               <Route path='/contact' component={contact} />
+              <Route path='/blog' component={blog} />
               { this.state.loggedInStatus === 'LOGGED_IN' ? this.authorizePages() : null }
               <Route exact path='/portfolio/:slug' component={PortfolioDetail} />
               <Route component={noMatch} />
