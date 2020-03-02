@@ -68,6 +68,8 @@ export default class PortfolioForm extends Component {
                             value={ this.state.url } 
                             onChange={ this.handleChange }
                         />
+                    </div>
+                    <div>
                         <input 
                             type='text' 
                             name='position' 
@@ -75,25 +77,27 @@ export default class PortfolioForm extends Component {
                             value={ this.state.position } 
                             onChange={ this.handleChange }
                         />
-                        <input 
-                            type='text' 
+                        <select 
                             name='category' 
-                            placeholder='Category' 
                             value={ this.state.category } 
                             onChange={ this.handleChange }
+                        >
+                            <option value='eCommerce'>eCommerce</option>
+                            <option value='Scheduling'>Scheduling</option>
+                            <option value='Enterprise'>Enterprise</option>
+                        </select>
+                    </div>
+                    <div>
+                        <input 
+                            type='text' 
+                            name='description' 
+                            placeholder='Description' 
+                            value={ this.state.description } 
+                            onChange={ this.handleChange }
                         />
-                        <div>
-                            <input 
-                                type='text' 
-                                name='description' 
-                                placeholder='Description' 
-                                value={ this.state.description } 
-                                onChange={ this.handleChange }
-                            />
-                        </div>
-                        <div>
-                            <button type='submit'>Save</button>
-                        </div>
+                    </div>
+                    <div>
+                        <button type='submit'>Save</button>
                     </div>
                 </form>
             </div>
