@@ -122,8 +122,6 @@ export default class PortfolioForm extends Component {
     render() {
         return (
             <div>
-                <h1>FORMMMMM</h1>
-
                 <form onSubmit={ this.handleSubmit } className='portfolio-form-wrapper'>
                     <div>
                         <input 
@@ -150,6 +148,7 @@ export default class PortfolioForm extends Component {
                             onChange={ this.handleChange }
                         />
                         <select 
+                            className='select-element'
                             name='category' 
                             value={ this.state.category } 
                             onChange={ this.handleChange }
