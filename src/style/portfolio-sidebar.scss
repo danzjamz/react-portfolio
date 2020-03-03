@@ -17,15 +17,26 @@
             color: $offwhite;
             font-size: 1.5em;
         }
+        .actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
 
-        .delete-icon {
-            cursor: pointer;
-            color: $offwhite;
-            font-size: 1.5em;
-            transition: 0.5s ease-in-out;
+            .action-icon  {
+                cursor: pointer;
+                color: $offwhite;
+                font-size: 1.5em;
+                transition: 0.5s ease-in-out;
+            }
 
-            &:hover {
-                color: $warning;
+            .edit:hover {
+                color: #cc9a10;
+            }
+
+            .del {
+                &:hover{
+                    color: $warning;
+                }
             }
         }
     }
