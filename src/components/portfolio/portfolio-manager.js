@@ -48,7 +48,6 @@ export default class PortfolioManager extends Component {
         return (
             <div className="portfolio-manager-wrapper">
                 <div className="left-column">
-                    <h1>Portfolio form....</h1>
                     <PortfolioForm 
                       handleSuccessfulFormSubmission={ this.handleSuccessfulFormSubmission }
                       handleFormSubmissionError={ this.handleFormSubmissionError }
