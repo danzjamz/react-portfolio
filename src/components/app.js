@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FortAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 import NavigationComponent from './navigation/navigation-container';
 import home from './pages/home';
@@ -11,6 +14,8 @@ import noMatch from './pages/no-match';
 import Auth from './pages/auth';
 import axios from 'axios';
 import PortfolioManager from './portfolio/portfolio-manager';
+
+library.add(faTrash, faSignOutAlt);
 
 export default class App extends Component {
   constructor(props) {
