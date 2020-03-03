@@ -124,7 +124,7 @@ export default class PortfolioForm extends Component {
             <div>
                 <h1>FORMMMMM</h1>
 
-                <form onSubmit={ this.handleSubmit }>
+                <form onSubmit={ this.handleSubmit } className='portfolio-form-wrapper'>
                     <div>
                         <input 
                             type='text' 
