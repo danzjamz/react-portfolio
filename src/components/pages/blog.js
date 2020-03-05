@@ -13,6 +13,7 @@ export default class Blog extends Component {
         this.getBlogItems = this.getBlogItems.bind(this);
     }
 
+    // componentWillMount() { // Jordan used this, but its 'unsafe'
     componentDidMount() {
         this.getBlogItems();
     }
@@ -29,11 +30,15 @@ export default class Blog extends Component {
     }
 
     render() {
+        const blogRecords = this.state.blogItems.map(blogItem => {
+            return <h1 key={ blogItem.id }>{ blogItem.title }</h1>
+        });
         return (
             <div>
                 <h2>Blog</h2>
     
                 <div>
+                    { blogRecords }
                     <Link to='/about'>More about me</Link>
                 </div>
             </div>
