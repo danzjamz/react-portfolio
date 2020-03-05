@@ -12,5 +12,14 @@
         @include base-grid();
         grid-template-columns: repeat(3, 250px);
         justify-content: space-around;
+
+        .portfolio-manager-image-wrapper {
+            img {
+                width: 100%;
+                height: 120px;
+                object-fit: cover;
+                border-radius: 5px;
+            }
+        }
     }
 }
