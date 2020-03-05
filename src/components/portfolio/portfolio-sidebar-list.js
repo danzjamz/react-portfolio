@@ -22,7 +22,6 @@ const PortfolioSidebarList = (props) => {
             </div>
         )
     });
-    console.log(portfolioList)
     
     return (
         <div className='portfolio-sidebar-list-wrapper'>
