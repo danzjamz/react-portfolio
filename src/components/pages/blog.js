@@ -13,7 +13,7 @@ export default class Blog extends Component {
         this.state = {
             blogItems: [],
             totalCount: 0,
-            currentPage: 1,
+            currentPage: 0,
             isLoading: true
         }
 
@@ -28,8 +28,12 @@ export default class Blog extends Component {
 
     activateInfiniteScroll() {
         window.onscroll = () => {
+            if (this.state.isLoading || this.state.blogItems.length === this.state.totalCount) {
+                return;
+            }
+
             if ((window.innerHeight + document.documentElement.scrollTop) === document.documentElement.offsetHeight) {
-                console.log('get more posts');
+                this.getBlogItems()
             }
         }
     }
@@ -38,14 +42,14 @@ export default class Blog extends Component {
         this.setState({
             currentPage: this.state.currentPage + 1
         })
-        axios.get('https://danzjamz.devcamp.space/portfolio/portfolio_blogs', { withCredentials: true })
+        axios.get(`https://danzjamz.devcamp.space/portfolio/portfolio_blogs?page=${this.state.currentPage}`, 
+        { withCredentials: true })
             .then(response => {
                 this.setState({
-                    blogItems: response.data.portfolio_blogs,
+                    blogItems: this.state.blogItems.concat(response.data.portfolio_blogs),
                     totalCount: response.data.meta.total_records,
                     isLoading: false
                 });
-                console.log(response)
             }).catch(error => {
                 console.log('getBlogItems error', error);
             })
@@ -55,21 +59,25 @@ export default class Blog extends Component {
         const blogRecords = this.state.blogItems.map(blogItem => {
             return <BlogItem key={blogItem.id} blogItem={ blogItem } />
         });
-        console.log(this.state.isLoading)
+        
         return (
             <div>
-                <div className='blog-container'>
-                    { !this.state.isLoading ? (
-                            <div className='content-container'>
-                                { blogRecords }
-                            </div>
-                        ) : (
-                            <div className='content-loader'>
-                                <FontAwesomeIcon icon='spinner' spin />
-                            </div>
-                        )
-                    }
-                </div>
+                { this.state.blogItems ? (
+                    <div className='blog-container'>
+                        { !this.state.isLoading ? (
+                                <div className='content-container'>
+                                    { blogRecords }
+                                </div>
+                            ) : (
+                                <div className='content-loader'>
+                                    <FontAwesomeIcon icon='spinner' spin />
+                                </div>
+                            )
+                        }
+                    </div>
+                ) : (
+                    null
+                )}
             </div>
         )
     }
