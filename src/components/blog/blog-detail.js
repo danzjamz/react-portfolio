@@ -18,16 +18,19 @@ export default class BlogDetail extends Component {
     getBlogItem() {
         axios.get(`https://danzjamz.devcamp.space/portfolio/portfolio_blogs/${ this.state.currentId }`)
             .then(response => {
-                console.log(response)
+                this.setState({ blogItem: response.data.portfolio_blog });
             }).catch(error => {
                 console.log('getBlogItem error', error)
             })
     }
 
     render() {
+        const { id, title, content, blog_status, featured_image_url } = this.state.blogItem;
         return (
             <div>
-                { this.state.currentId }
+                <h1>{ title }</h1>
+                <img src={ featured_image_url } />
+                <p>{ content }</p>
             </div>
         )
     }
