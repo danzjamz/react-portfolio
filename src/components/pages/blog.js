@@ -45,6 +45,7 @@ export default class Blog extends Component {
                     totalCount: response.data.meta.total_records,
                     isLoading: false
                 });
+                console.log(response)
             }).catch(error => {
                 console.log('getBlogItems error', error);
             })
@@ -54,15 +55,20 @@ export default class Blog extends Component {
         const blogRecords = this.state.blogItems.map(blogItem => {
             return <BlogItem key={blogItem.id} blogItem={ blogItem } />
         });
+        console.log(this.state.isLoading)
         return (
             <div>
                 <div className='blog-container'>
-                <div>
-                    <FontAwesomeIcon icon='spinner' spin />
-                </div>
-                    <div className='content-container'>
-                        { blogRecords }
-                    </div>
+                    { !this.state.isLoading ? (
+                            <div className='content-container'>
+                                { blogRecords }
+                            </div>
+                        ) : (
+                            <div className='content-loader'>
+                                <FontAwesomeIcon icon='spinner' spin />
+                            </div>
+                        )
+                    }
                 </div>
             </div>
         )
