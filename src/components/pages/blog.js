@@ -18,7 +18,8 @@ export default class Blog extends Component {
         }
 
         this.getBlogItems = this.getBlogItems.bind(this);
-        this.activateInfiniteScroll();
+        this.onScroll = this.onScroll.bind(this);
+        window.addEventListener('scroll', this.onScroll, false);
     }
 
     // componentWillMount() { // Jordan used this, but its 'unsafe'
@@ -26,15 +27,17 @@ export default class Blog extends Component {
         this.getBlogItems();
     }
 
-    activateInfiniteScroll() {
-        window.onscroll = () => {
-            if (this.state.isLoading || this.state.blogItems.length === this.state.totalCount) {
-                return;
-            }
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.onScroll, false);
+    }
 
-            if ((window.innerHeight + document.documentElement.scrollTop) === document.documentElement.offsetHeight) {
-                this.getBlogItems()
-            }
+    onScroll() {
+        if (this.state.isLoading || this.state.blogItems.length === this.state.totalCount) {
+            return;
+        }
+
+        if ((window.innerHeight + document.documentElement.scrollTop) === document.documentElement.offsetHeight) {
+            this.getBlogItems()
         }
     }
 
@@ -59,7 +62,7 @@ export default class Blog extends Component {
         const blogRecords = this.state.blogItems.map(blogItem => {
             return <BlogItem key={blogItem.id} blogItem={ blogItem } />
         });
-        
+
         return (
             <div>
                 { this.state.blogItems ? (
