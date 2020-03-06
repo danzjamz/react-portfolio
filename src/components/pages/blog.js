@@ -12,11 +12,18 @@ export default class Blog extends Component {
         }
 
         this.getBlogItems = this.getBlogItems.bind(this);
+        this.activateInfiniteScroll();
     }
 
     // componentWillMount() { // Jordan used this, but its 'unsafe'
     componentDidMount() {
         this.getBlogItems();
+    }
+
+    activateInfiniteScroll() {
+        window.onscroll = () => {
+            console.log('onscroll')
+        }
     }
 
     getBlogItems() {
