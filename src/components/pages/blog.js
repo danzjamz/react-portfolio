@@ -36,11 +36,8 @@ export default class Blog extends Component {
         });
         return (
             <div>
-                <h2>Blog</h2>
-    
-                <div>
-                    { blogRecords }
-                    <Link to='/about'>More about me</Link>
+                <div className='blog-container'>
+                    <div className='content-container'>{ blogRecords }</div>
                 </div>
             </div>
         )
