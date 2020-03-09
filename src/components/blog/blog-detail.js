@@ -39,7 +39,10 @@ export default class BlogDetail extends Component {
         const { id, title, content, blog_status, featured_image_url } = this.state.blogItem;
         
         if (this.state.editMode) {
-            return <BlogForm />
+            return <BlogForm 
+                editMode={this.state.editMode}
+                blog={this.state.blogItem}
+            />
         } else {
             return (
                 <div className='content-container'>

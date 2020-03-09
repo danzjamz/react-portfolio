@@ -8,6 +8,7 @@ export default class BlogForm extends Component {
         super(props);
 
         this.state = {
+            id: '',
             title: '',
             blog_status: '', 
             content: '',
@@ -23,6 +24,17 @@ export default class BlogForm extends Component {
         this.handleFeaturedImageDrop = this.handleFeaturedImageDrop.bind(this);
 
         this.featuredImageRef = React.createRef();
+    }
+
+    componentWillMount() {
+        console.log(this.props.blog)
+        if (this.props.editMode) {
+            this.setState({
+                id: this.props.blog.id,
+                title: this.props.blog.title,
+                blog_status: this.props.blog.blog_status
+            });
+        }
     }
 
     componentConfig() {
@@ -114,7 +126,16 @@ export default class BlogForm extends Component {
                     />
                 </div>
 
-                <RichTextEditor handleRichTextEditorChange={ this.handleRichTextEditorChange } />
+                <div className="one-column">
+                    <RichTextEditor 
+                        handleRichTextEditorChange={ this.handleRichTextEditorChange } 
+                        editMode={ this.props.editMode }
+                        contentToEdit={
+                            this.props.editMode && this.props.blog.content ?
+                            this.props.blog.content : null }
+                    />
+
+                </div>
                 
                 <div className='image-uploaders'>
                     <DropzoneComponent
