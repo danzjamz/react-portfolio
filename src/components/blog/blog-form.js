@@ -114,6 +114,8 @@ export default class BlogForm extends Component {
                     />
                 </div>
 
+                <RichTextEditor handleRichTextEditorChange={ this.handleRichTextEditorChange } />
+                
                 <div className='image-uploaders'>
                     <DropzoneComponent
                         ref={ this.featuredImageRef }
@@ -125,9 +127,7 @@ export default class BlogForm extends Component {
                     </DropzoneComponent>
                 </div>
 
-                <RichTextEditor handleRichTextEditorChange={ this.handleRichTextEditorChange } />
-
-                <button className='btn'>button</button>
+                <button className='btn'>Save</button>
             </form>
         )
     }
