@@ -27,7 +27,7 @@ export default class BlogForm extends Component {
     }
 
     componentWillMount() {
-        console.log(this.props.blog)
+        // console.log(this.props.blog.title)
         if (this.props.editMode) {
             this.setState({
                 id: this.props.blog.id,
@@ -77,7 +77,7 @@ export default class BlogForm extends Component {
     }
 
     handleChange(event) {
-        this.setState({ [event.target.name]: event.target.value })
+        this.setState({ [event.target.name]: event.target.value });
     }
 
     handleSubmit(event) {
@@ -116,12 +116,15 @@ export default class BlogForm extends Component {
                         type='text' 
                         name='title'
                         placeholder='title'
+                        value={this.state.title}
                         onChange={ this.handleChange } 
                     />
+                    {/*  */}
                     <input 
                         type='text'
                         name='blog_status' 
                         placeholder='blog status'
+                        value={this.state.blog_status}
                         onChange={this.handleChange } 
                     />
                 </div>
@@ -138,14 +141,24 @@ export default class BlogForm extends Component {
                 </div>
                 
                 <div className='image-uploaders'>
-                    <DropzoneComponent
-                        ref={ this.featuredImageRef }
-                        config={ this.componentConfig() }
-                        djsConfig={ this.djsConfig() }
-                        eventHandlers={ this.handleFeaturedImageDrop() }
-                    >
-                        <div className='dz-message'>Featured Image</div>
-                    </DropzoneComponent>
+                    { this.props.editMode && this.props.blog.featured_image_url ? (
+                        <div className='portfolio-manager-image-wrapper'>
+                            <img src={this.props.blog.featured_image_url} />
+
+                            <div className='image-removal-link'>
+                                {/* <a onClick={ () => this.deleteImage('')}>Remove file</a> */}
+                            </div>
+                        </div>
+                    ) : (
+                        <DropzoneComponent
+                            ref={ this.featuredImageRef }
+                            config={ this.componentConfig() }
+                            djsConfig={ this.djsConfig() }
+                            eventHandlers={ this.handleFeaturedImageDrop() }
+                        >
+                            <div className='dz-message'>Featured Image</div>
+                        </DropzoneComponent>
+                    )}
                 </div>
 
                 <button className='btn'>Save</button>
