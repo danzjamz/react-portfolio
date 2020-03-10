@@ -166,7 +166,7 @@ export default class BlogForm extends Component {
                 <div className='image-uploaders'>
                     { this.props.editMode && this.props.blog.featured_image_url ? (
                         <div className='portfolio-manager-image-wrapper'>
-                            <img src={this.props.blog.featured_image_url} />
+                            <img className='form-featured-img' src={this.props.blog.featured_image_url} />
 
                             <div className='image-removal-link'>
                                 <a onClick={ () => this.deleteImage('featured_image')}>Remove file</a>
