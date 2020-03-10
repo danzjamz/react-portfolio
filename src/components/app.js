@@ -112,7 +112,11 @@ export default class App extends Component {
 
               { this.state.loggedInStatus === 'LOGGED_IN' ? this.authorizedPages() : null }
               
-              <Route exact path='/portfolio/:slug' component={PortfolioDetail} />
+              <Route 
+                exact path='/portfolio/:slug' 
+                component={PortfolioDetail} 
+                
+              />
               <Route component={noMatch} />
             </Switch>
           </div>
