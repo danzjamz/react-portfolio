@@ -19,22 +19,30 @@ export default class PortfolioContainer extends Component {
     }
 
     handleFilter(filter) {
-        this.setState({
-            data: this.state.data.filter(item => {
-                return item.category === filter;
-            })
-        });
+        if (filter === 'CLEAR_FILTERS') {
+            this.getPortfolioItems();
+        } else {
+            this.getPortfolioItems(filter);
+        }
     }
 
-    getPortfolioItems() {
+    getPortfolioItems(filter = null) {
         // Make a request for a user with a given ID
         axios.get('https://danzjamz.devcamp.space/portfolio/portfolio_items')
           .then((response) => {
             // handle success
             console.log(response);
-            this.setState({
-                data: response.data.portfolio_items
-            })
+            if (filter) {
+                this.setState({
+                    data: response.data.portfolio_items.filter(item => {
+                        return item.category === filter;
+                    })
+                })
+            } else {
+                this.setState({
+                    data: response.data.portfolio_items
+                })
+            }
           })
           .catch((error) => {
             // handle error
@@ -64,14 +72,17 @@ export default class PortfolioContainer extends Component {
 
         return (
             // uses JSX to simplify rendering of html from react
-            
-                <div className="portfolio-items-wrapper">
+            <div className="homepage-wrapper">
+                <div className='filter-links'>
                     <button className="btn" onClick={() => this.handleFilter('eCommerce')}>eCommerce</button>
                     <button className="btn" onClick={() => this.handleFilter('Enterprise')}>Enterprise</button>
                     <button className="btn" onClick={() => this.handleFilter('Education')}>Education</button>
-
+                    <button className='btn' onClick={() => this.handleFilter('CLEAR_FILTERS')}>All</button>
+                </div>
+                <div className="portfolio-items-wrapper">
                     { this.portfolioItems() }
                 </div>
+            </div>
         );
     }
 }
