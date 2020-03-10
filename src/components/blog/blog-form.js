@@ -12,7 +12,9 @@ export default class BlogForm extends Component {
             title: '',
             blog_status: '', 
             content: '',
-            featured_image: ''
+            featured_image: '',
+            apiUrl: `https://danzjamz.devcamp.space/portfolio/portfolio_blogs`,
+            apiAction: 'post'
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -24,6 +26,7 @@ export default class BlogForm extends Component {
         this.handleFeaturedImageDrop = this.handleFeaturedImageDrop.bind(this);
 
         this.featuredImageRef = React.createRef();
+        this.deleteImage = this.deleteImage.bind(this);
     }
 
     componentWillMount() {
@@ -32,7 +35,11 @@ export default class BlogForm extends Component {
             this.setState({
                 id: this.props.blog.id,
                 title: this.props.blog.title,
-                blog_status: this.props.blog.blog_status
+                blog_status: this.props.blog.blog_status,
+                content: this.props.blog.content,
+                apiUrl: `https://danzjamz.devcamp.space/portfolio/portfolio_blogs/
+                ${this.props.blog.id}`,
+                apiAction: 'put'
             });
         }
     }
@@ -81,32 +88,49 @@ export default class BlogForm extends Component {
     }
 
     handleSubmit(event) {
-        axios
-          .post(
-            "https://danzjamz.devcamp.space/portfolio/portfolio_blogs",
-            this.buildForm(),
-            { withCredentials: true }
-          )
-          .then(response => {
-            if (this.state.featured_image) {
-                this.featuredImageRef.current.dropzone.removeAllFiles();
-            }
-                
-            this.setState({
-                    title: '',
-                    blog_status: '', 
-                    content: '',
-                    featured_image: ''
+        axios({
+            method: this.state.apiAction,
+            url: this.state.apiUrl,
+            data: this.buildForm(),
+            withCredentials: true
+            })
+            .then(response => {
+                if (this.state.featured_image) {
+                    this.featuredImageRef.current.dropzone.removeAllFiles();
+                }
+                    
+                this.setState({
+                        title: '',
+                        blog_status: '', 
+                        content: '',
+                        featured_image: ''
+                });
+
+                if (this.props.editMode) {
+                    this.props.handleUpdateFormSubmission(response.data.portfolio_blog)
+                } else {
+                    this.props.handleSuccessfulFormSubmission(response.data.portfolio_blog);
+                }
+                    
+            })
+            .catch(error => {
+                console.log("handleSubmit for blog error", error);
             });
-                
-            this.props.handleSuccessfulFormSubmission(response.data.portfolio_blog);
-          })
-          .catch(error => {
-            console.log("handleSubmit for blog error", error);
-          });
 
           event.preventDefault();
-        }
+    }
+
+    deleteImage(imageType) {
+        axios.delete(`https://api.devcamp.space/portfolio/delete-portfolio-blog-image/${
+            this.props.blog.id
+          }?image_type=${imageType}`, 
+        { withCredentials: true })
+            .then(response => {
+                this.props.handleFeaturedImageDelete();
+            }).catch(error => {
+                console.log(error)
+            })
+    }
 
     render() {
         return (
@@ -119,7 +143,6 @@ export default class BlogForm extends Component {
                         value={this.state.title}
                         onChange={ this.handleChange } 
                     />
-                    {/*  */}
                     <input 
                         type='text'
                         name='blog_status' 
@@ -146,7 +169,7 @@ export default class BlogForm extends Component {
                             <img src={this.props.blog.featured_image_url} />
 
                             <div className='image-removal-link'>
-                                {/* <a onClick={ () => this.deleteImage('')}>Remove file</a> */}
+                                <a onClick={ () => this.deleteImage('featured_image')}>Remove file</a>
                             </div>
                         </div>
                     ) : (
